@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <script type="text/javascript" src="jquery/jquery.js"></script>
+    <script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+    <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="box1" align="center">
+	<div><h3>Printer4People</h3></div>
+    <table border="1"  class="tableStyle" align="center">
+        <tr>
+            <td>Имя</td>
+            <td><input type="text" id="login" value=""/></td>
+        </tr>
+        <tr>
+            <td>Пароль</td>
+            <td><input type="password" id="pass" value=""/></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input id="loginButton" type="button" value="Войти" onclick="loginButton();"/></td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    function loginButton() {
+        var dates = {
+            login: document.getElementById('login').value,
+            pass: document.getElementById('pass').value
+        }
+            $.post("/authorization", dates, function() {
+                location.href = '/';
+            });
+    }
+</script>
+</body>
+</html>

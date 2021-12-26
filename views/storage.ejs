@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <title>Главная</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="jquery/jquery.js"></script>
+    <script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="jquery/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="jquery/datepicker-ru.js"></script>
+
+    <script type="text/javascript" src="js/code.js"></script>
+
+    <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+
+    <link href="css/select2.min.css" rel="stylesheet" />
+    <script src="js/select2.min.js"></script>
+    <script src="js/ru.js"></script>
+</head>
+<body>
+<div id="box1" align="center">
+    <div><h3>Склад</h3></div>
+
+    <div id="menu" align="center"></div>
+
+    <div id="box">
+        <button id="addButton" onclick="addStorage();">Добавить</button>
+        <table border="1" class="tableStyle" id="table1">
+            <tr>
+                <th colspan="5">Склад</th>
+            </tr>
+            <tr>
+                <th>№</th>
+                <th>Модель</th>
+                <th>Тип</th>
+                <th>Стоимость</th>
+                <th>Редактирование</th>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+<script>
+    $.post('/menu', function(data) {
+        $('#menu').append(data);
+    });
+
+    $.post('/storageUp', function(data) {
+        if (data) {
+            $('#table1').append(data);
+        } else {
+            $('#table1').append("<tr><td colspan='5' align='center'><i>Данных нет</i></td></tr>");
+        }
+    });
+
+    function edit(id) {
+        location.href = '/editStorage?id=' + id;
+    }
+
+    function del(id) {
+        var data = {
+            id: id,
+        };
+
+        if (confirm("Вы уверены что хотите удалить запись?")) {
+            $.post("/delStorage", data, function () {
+                alert("Запись удалена!")
+                location.href = '/storage';
+            });
+        }
+    }
+</script>
+</html>

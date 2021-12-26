@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <title>Главная</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="jquery/jquery.js"></script>
+    <script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="jquery/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="jquery/datepicker-ru.js"></script>
+
+    <script type="text/javascript" src="js/code.js"></script>
+
+    <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+
+    <link href="css/select2.min.css" rel="stylesheet" />
+    <script src="js/select2.min.js"></script>
+    <script src="js/ru.js"></script>
+</head>
+<body>
+<div id="box1" align="center">
+    <div><h3>Услуги</h3></div>
+
+    <div id="menu" align="center"></div>
+
+    <div id="box">
+        <button id="addButton" onclick="addStorage();">Добавить</button>
+        <table border="1" class="tableStyle" id="table1">
+            <tr>
+                <th colspan="2">Ввод информации Услуги</th>
+            </tr>
+            <tr>
+                <td>
+                    Услуга
+                </td>
+                <td>
+                    <input id="service" type="text" >
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Цена
+                </td>
+                <td>
+                    <input id="cost" type="text" >
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Время выполнения
+                </td>
+                <td>
+                    <input id="time" type="text" >
+                </td>
+            </tr>
+            <tr align="center" >
+                <td>
+                    <input type="button" onclick="save()" value="Сохранить">
+                </td>
+                <td>
+                    <input type="button" onclick="cancel()" value="Отмена">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+<script>
+    $.post('/menu', function(data) {
+        $('#menu').append(data);
+    });
+
+    function cancel() {
+        location.href = '/services';
+    }
+
+    function save() {
+        var data = {
+            service: $('#service').val(),
+            cost: $("#cost").val(),
+            time: $("#time").val(),
+        };
+        $.post("/saveService", data, function () {
+            location.href = '/services';
+        });
+    }
+</script>
+</html>

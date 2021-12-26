@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <title>Главная</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="jquery/jquery.js"></script>
+    <script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="jquery/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="jquery/datepicker-ru.js"></script>
+
+    <script type="text/javascript" src="js/code.js"></script>
+
+    <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+
+    <link href="css/select2.min.css" rel="stylesheet" />
+    <script src="js/select2.min.js"></script>
+    <script src="js/ru.js"></script>
+</head>
+<body>
+<div id="box1" align="center">
+    <div><h3>Клиенты</h3></div>
+
+    <div id="menu" align="center"></div>
+
+    <div id="box">
+        <table border="1" class="tableStyle" id="table1">
+            <tr>
+                <th colspan="2">Ввод информации Клиенты</th>
+            </tr>
+            <tr>
+                <td>
+                    ФИО
+                </td>
+                <td>
+                    <input id="name" type="text" value="<%=data.name%>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Услуга
+                </td>
+                <td>
+                    <select id="service" >
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Устройство
+                </td>
+                <td>
+                    <select id="device" >
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Стоимость заказа
+                </td>
+                <td>
+                    <input id="cost" type="text" value="<%=data.cost%>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Объем заказа
+                </td>
+                <td>
+                    <input id="quantity" type="text" value="<%=data.quantity%>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Адрес
+                </td>
+                <td>
+                    <input id="address" type="text" value="<%=data.address%>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Компания
+                </td>
+                <td>
+                    <select id="company" >
+
+                    </select>
+                </td>
+            </tr>
+            <tr align="center" >
+                <td>
+                    <input type="button" onclick="save()" value="Сохранить">
+                </td>
+                <td>
+                    <input type="button" onclick="cancel()" value="Отмена">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+<script>
+    $.post('/menu', function(data) {
+        $('#menu').append(data);
+    });
+
+    $.post('/getCompanies', function(data) {
+        $('#company')
+            .append(data);
+        $("#company").val(<%=data.company%>);
+    });
+
+    $.post('/getServices', function(data) {
+        $('#service')
+            .append(data);
+        $("#service").val(<%=data.service%>);
+    });
+
+    $.post('/getStorage', function(data) {
+        $('#device')
+            .append(data);
+        $("#device").val(<%=data.device%>);
+    });
+
+    function cancel() {
+        location.href = '/customers';
+    }
+
+    function save() {
+        var data = {
+            name: $('#name').val(),
+            service: $("#service").val(),
+            device: $("#device").val(),
+            cost: $("#cost").val(),
+            quantity: $("#quantity").val(),
+            address: $("#address").val(),
+            company: $("#company").val(),
+            id: getQueryVariable("id")
+        };
+        $.post("/updateCustomer", data, function () {
+            location.href = '/customers';
+        });
+    }
+</script>
+</html>

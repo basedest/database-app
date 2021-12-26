@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 12pt;
+    background: fixed linear-gradient(to top, #91A3C6, #EAECF0);
+}
+.tableStyle  {
+    border-collapse: collapse;
+    background-color: #f8f9fa;
+    color: #222;
+    margin: 1em 0;
+    border: 1px solid #a2a9b1;
+}
+th {
+    background-color: #eaecf0;
+    text-align: center;
+    padding: 0.2em 0.4em;
+}
+td {
+    padding: 0.2em 0.4em;
+}
+pre {
+    font-family: Arial, sans-serif;
+    font-size: 12pt;
+    white-space: pre-wrap;
+    margin: 0;
+}
+input, select, button {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+input[type="text"].wrong,  textarea.wrong,
+.ui-selectmenu-button.wrong {
+    background-color: #ffcfc8;
+    border-color: #ff897a;
+}
+input[type="text"]:not(.addressInput), select {
+    width: 100%;
+    box-sizing: border-box;
+}
+input[type="password"] {
+    width: 100%;
+    box-sizing: border-box;
+}
+/*input[type="button"] {
+    cursor: pointer;
+}*/
+button, input[type="button"] {
+    cursor: pointer;
+    margin: 1px;
+}
+/*input[type="button"]:hover, button:hover {
+    background-color: #A4A4A4;
+}*/
+
+#filter {
+    margin: 0 0 1em;
+    /*display: inline-block;*/
+}
+#firstDate, #lastDate {
+    width: 9em;
+}
+#control {
+    text-align: center;
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 10pt;
+}
+
+.ui-autocomplete {
+    max-height: 292px;
+    max-width: 700px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
+.ui-accordion-header {
+    display: inline-block;
+}
+
+#box {
+    /*display: inline-block;*/
+    margin: 1em 0 1em 0;
+    width: 65%;
+}
+
+.txt {
+    text-align: justify;
+}
+
